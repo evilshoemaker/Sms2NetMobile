@@ -1,14 +1,17 @@
 package ru.digios.sms2net.core;
 
+import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class Message {
+public class Message implements Serializable {
 
-    private int id;
-    private Date date;
-    private String phoneNumber;
-    private String text;
+    private static SimpleDateFormat format = new SimpleDateFormat("HH:mm:ss dd.MM.yyyy");
+
+    private int id = 0;
+    private Date date = new Date();
+    private String phoneNumber = "";
+    private String text = "";
     private MessageStatus status = MessageStatus.NOT_SENT;
 
     public Message() {
@@ -61,5 +64,10 @@ public class Message {
 
     public void setDate(Date date) {
         this.date = date;
+    }
+
+    @Override
+    public String toString() {
+        return format.format(date) + "; From: " + phoneNumber + "; Text: " + text;
     }
 }

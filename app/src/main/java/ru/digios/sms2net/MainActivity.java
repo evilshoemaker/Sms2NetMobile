@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+import ru.digios.sms2net.core.Message;
 import ru.digios.sms2net.core.SmsService;
 import ru.digios.sms2net.core.SmsStorage;
 
@@ -25,8 +26,16 @@ public class MainActivity extends AppCompatActivity {
         button = (Button) findViewById(R.id.button);
         button.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                startService(
-                        new Intent(MainActivity.this, SmsService.class));
+
+                Message message = new Message();
+                message.setText("fjgfks");
+
+                Intent mIntent = new Intent(MainActivity.this, SmsService.class);
+                mIntent.putExtra("message", message);
+                context.startService(mIntent);
+
+
+                //startService(new Intent(MainActivity.this, SmsService.class));
                 //SmsStorage storage = new SmsStorage(context);
                 //storage.getSms();
             }

@@ -32,7 +32,7 @@ public class MessageDatabaseHelper extends SQLiteOpenHelper implements IDatabase
                 + KEY_ID + " INTEGER PRIMARY KEY,"
                 + KEY_DATE + " INTEGER,"
                 + KEY_TEXT + " TEXT,"
-                + KEY_PH_NO + " TEXT"
+                + KEY_PH_NO + " TEXT,"
                 + KEY_STATUS + " TEXT"
                 + ")";
         db.execSQL(CREATE_CONTACTS_TABLE);
@@ -75,18 +75,20 @@ public class MessageDatabaseHelper extends SQLiteOpenHelper implements IDatabase
                 cursor.getString(3),
                 MessageStatus.valueOf(cursor.getString(4))
                 );
-
+        cursor.close();
         return contact;
     }
 
     @Override
     public boolean isMessageExist(Message message) {
-        String countQuery = "SELECT  * FROM " + TABLE_MESSAGES + " WHERE text = '" + message.getText() + "'";
+        String countQuery = "SELECT * FROM " + TABLE_MESSAGES + " WHERE text = '" + message.getText() + "'";
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery(countQuery, null);
+
+        int count  = cursor.getCount();
         cursor.close();
 
-        return cursor.getCount() > 0;
+        return count > 0;
     }
 
     @Override
@@ -108,6 +110,7 @@ public class MessageDatabaseHelper extends SQLiteOpenHelper implements IDatabase
             message.setStatus(MessageStatus.valueOf(cursor.getString(4)));
             messageList.add(message);
         }
+        cursor.close();
 
         return messageList;
     }
@@ -131,6 +134,7 @@ public class MessageDatabaseHelper extends SQLiteOpenHelper implements IDatabase
             message.setStatus(MessageStatus.valueOf(cursor.getString(4)));
             messageList.add(message);
         }
+        cursor.close();
 
         return messageList;
     }
@@ -142,7 +146,10 @@ public class MessageDatabaseHelper extends SQLiteOpenHelper implements IDatabase
         Cursor cursor = db.rawQuery(countQuery, null);
         cursor.close();
 
-        return cursor.getCount();
+        int count  = cursor.getCount();
+        cursor.close();
+
+        return count;
     }
 
     @Override
