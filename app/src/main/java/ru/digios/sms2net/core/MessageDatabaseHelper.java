@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public class DbMessage extends SQLiteOpenHelper implements IDatabaseMessageHandler {
+public class MessageDatabaseHelper extends SQLiteOpenHelper implements IDatabaseMessageHandler {
 
     private static final int DATABASE_VERSION = 1;
     private static final String DATABASE_NAME = "messages.db";
@@ -22,7 +22,7 @@ public class DbMessage extends SQLiteOpenHelper implements IDatabaseMessageHandl
     private static final String KEY_STATUS = "status";
 
 
-    public DbMessage(Context context) {
+    public MessageDatabaseHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
 

@@ -4,13 +4,12 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class Message {
-    private static SimpleDateFormat format = new SimpleDateFormat("HH:mm:ss dd.MM.yyyy");
 
     private int id;
     private Date date;
     private String phoneNumber;
     private String text;
-    private MessageStatus status = MessageStatus.SENT;
+    private MessageStatus status = MessageStatus.NOT_SENT;
 
     public Message() {
 
@@ -59,10 +58,6 @@ public class Message {
     public Date getDate() {
         return date;
     }
-
-    /*public String getDateStr() {
-        format
-    }*/
 
     public void setDate(Date date) {
         this.date = date;
