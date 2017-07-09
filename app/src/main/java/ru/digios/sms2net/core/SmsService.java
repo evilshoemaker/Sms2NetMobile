@@ -13,11 +13,13 @@ import java.util.List;
 public class SmsService extends Service {
 
     private SmsStorage smsStorage = null;
-    MessageDatabaseHelper messageDatabase = null;
+    private MessageDatabaseHelper messageDatabase = null;
+    private Settings settings = null;
 
     public SmsService () {
         smsStorage = new SmsStorage(this);
         messageDatabase = new MessageDatabaseHelper(this);
+        settings = new Settings(this);
     }
 
     @Nullable
