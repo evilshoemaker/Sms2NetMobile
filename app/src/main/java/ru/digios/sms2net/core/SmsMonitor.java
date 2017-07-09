@@ -13,7 +13,6 @@ public class SmsMonitor extends BroadcastReceiver {
 
     @Override
     public void onReceive(Context context, Intent intent) {
-        Log.i("INFO.SmsMonitor", intent.getAction());
         if (intent != null && intent.getAction() != null && ACTION.compareToIgnoreCase(intent.getAction()) == 0) {
         //---получить входящее SMS сообщение---
         Bundle bundle= intent.getExtras();
