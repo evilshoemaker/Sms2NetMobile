@@ -2,6 +2,7 @@ package ru.digios.sms2net.core;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 
 public class Settings {
     private SharedPreferences settings = null;
@@ -12,7 +13,7 @@ public class Settings {
     private static final String AUTOSTART = "autostart";
 
     public Settings(Context context) {
-        settings = context.getSharedPreferences(APP_PREFERENCES, Context.MODE_PRIVATE);
+        settings = /*PreferenceManager.getDefaultSharedPreferences(context);*/context.getSharedPreferences(APP_PREFERENCES, Context.MODE_PRIVATE);
     }
 
     public String getWhitePhoneList() {

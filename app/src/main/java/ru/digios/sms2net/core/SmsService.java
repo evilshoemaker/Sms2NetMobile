@@ -4,22 +4,24 @@ import android.app.Service;
 import android.content.Intent;
 import android.os.IBinder;
 import android.support.annotation.Nullable;
-import android.util.Log;
-import android.widget.Toast;
+
+import org.apache.log4j.Logger;
 
 import java.io.Serializable;
 import java.util.List;
 
 public class SmsService extends Service {
+    private static final Logger logger = Log.getLogger(SmsService.class);
+
 
     private SmsStorage smsStorage = null;
     private MessageDatabaseHelper messageDatabase = null;
     private Settings settings = null;
 
     public SmsService () {
-        smsStorage = new SmsStorage(this);
-        messageDatabase = new MessageDatabaseHelper(this);
-        settings = new Settings(this);
+        smsStorage = new SmsStorage(SmsService.this);
+        messageDatabase = new MessageDatabaseHelper(SmsService.this);
+
     }
 
     @Nullable
@@ -32,6 +34,7 @@ public class SmsService extends Service {
     public void onCreate() {
         super.onCreate();
 
+        settings = new Settings(SmsService.this);
         loadSmsAsync();
     }
 
@@ -49,9 +52,9 @@ public class SmsService extends Service {
         Message message = (Message)obj;
         if (!messageDatabase.isMessageExist(message)) {
             messageDatabase.addMessage(message);
-            Log.i("INFO.SmsService", "Add message. " + message.toString());
+            //Log.i("INFO.SmsService", "Add message. " + message.toString());
         }
-        Log.i("INFO.SmsService", "Message. " + message.toString());
+        //Log.i("INFO.SmsService", "Message. " + message.toString());
 
         return Service.START_STICKY;//super.onStartCommand(intent, flags, startId);
     }
@@ -75,7 +78,7 @@ public class SmsService extends Service {
         for (Message message : messageList) {
             if (!messageDatabase.isMessageExist(message)) {
                 messageDatabase.addMessage(message);
-                Log.i("INFO.SmsService", "Add message. " + message.toString());
+                //Log.i("INFO.SmsService", "Add message. " + message.toString());
             }
         }
     }
