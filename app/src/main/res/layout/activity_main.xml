@@ -60,22 +60,24 @@
         android:id="@+id/startServiceButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="27dp"
-        android:text="Start service"
-        android:layout_below="@+id/editText2"
+        android:layout_alignParentEnd="true"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
         android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/intervalEditText"
+        android:layout_marginTop="27dp"
+        android:text="Запустить сервис" />
 
     <Button
         android:id="@+id/stopServiceButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Stop service"
-        android:layout_below="@+id/startServiceButton"
+        android:layout_alignParentEnd="true"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentRight="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/startServiceButton"
+        android:text="Остановить сервис" />
 
     <TextView
         android:id="@+id/textView3"
@@ -87,15 +89,37 @@
         android:text="Интервал отправки" />
 
     <EditText
-        android:id="@+id/editText2"
+        android:id="@+id/intervalEditText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_below="@+id/textView3"
         android:ems="10"
-        android:inputType="numberSigned"
+        android:inputType="number"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true" />
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginBottom="58dp"
+        android:text="Button"
+        android:visibility="invisible" />
+
+    <Button
+        android:id="@+id/clearDatabaseButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/stopServiceButton"
+        android:text="Очистить временное хранилище" />
 
 </RelativeLayout>

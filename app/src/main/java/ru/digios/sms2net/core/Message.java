@@ -4,15 +4,17 @@ import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import com.google.gson.annotations.Expose;
+
 public class Message implements Serializable {
 
     private static SimpleDateFormat format = new SimpleDateFormat("HH:mm:ss dd.MM.yyyy");
 
-    private int id = 0;
+    private transient int id = 0;
     private Date date = new Date();
     private String phoneNumber = "";
     private String text = "";
-    private MessageStatus status = MessageStatus.NOT_SENT;
+    private transient MessageStatus status = MessageStatus.NOT_SENT;
 
     public Message() {
 
@@ -24,6 +26,9 @@ public class Message implements Serializable {
         this.phoneNumber = phoneNumber;
         this.text = text;
         this.status = status;
+        if (status == null) {
+            this.status = MessageStatus.NOT_SENT;
+        }
     }
 
     public int getId() {

@@ -8,7 +8,9 @@ public interface IDatabaseMessageHandler {
     boolean isMessageExist(Message message);
     public List<Message> getAllMessage();
     public List<Message> getUnsentMessage();
-    public int getContactsCount();
+    //public int getContactsCount();
     public int updateMessage(Message contact);
     public void deleteMessage(Message contact);
+    public void deleteAll();
+    public void setSentMessages(List<Message> messages);
 }
