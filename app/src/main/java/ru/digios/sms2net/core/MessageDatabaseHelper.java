@@ -86,20 +86,21 @@ public class MessageDatabaseHelper extends SQLiteOpenHelper implements IDatabase
 
     @Override
     public boolean isMessageExist(Message message) {
-        String countQuery = "SELECT date, text FROM " + TABLE_MESSAGES + " WHERE text = '" + message.getText()
+        String countQuery = "SELECT COUNT(*) FROM " + TABLE_MESSAGES + " WHERE text = '" + message.getText()
                 + "' AND phone_number = '" + message.getPhoneNumber()// + "'";
-                + "' AND date >= " + String.valueOf(message.getDate().getTime() - 30) + " AND date <= " + String.valueOf(message.getDate().getTime() + 30);
+                + "' AND date >= " + String.valueOf(message.getDate().getTime() - 3000) + " AND date <= " + String.valueOf(message.getDate().getTime() + 3000);
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery(countQuery, null);
-        /*cursor.moveToFirst();
-        while (cursor.moveToNext()) {
-            long t = cursor.getInt(0);
+        cursor.moveToFirst();
+        /*while (cursor.moveToNext()) {
+            long t = cursor.getLong(0);
+            Date gg = new Date(t);
             String text = cursor.getString(1);
             t = t;
-        }
+        }*/
 
-        int count  = cursor.getInt(0);*/
-        int count = cursor.getCount();
+        int count  = cursor.getInt(0);
+        //int count = cursor.getCount();
         cursor.close();
 
         return count > 0;
