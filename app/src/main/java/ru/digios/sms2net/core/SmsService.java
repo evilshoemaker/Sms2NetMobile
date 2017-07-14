@@ -96,6 +96,11 @@ public class SmsService extends Service {
 
     private boolean isAllowed(String phoneNumber) {
         String[] numbers = settings.getWhitePhoneList().split(",");
+
+        if (numbers.length == 0) {
+            return true;
+        }
+
         for (String number : numbers) {
             if (phoneNumber.compareTo(number) == 0)
                 return true;
