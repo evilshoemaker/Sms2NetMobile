@@ -95,11 +95,11 @@ public class SmsService extends Service {
     }
 
     private boolean isAllowed(String phoneNumber) {
-        String[] numbers = settings.getWhitePhoneList().split(",");
-
-        if (numbers.length == 0) {
+        if (settings.getWhitePhoneList().isEmpty()) {
             return true;
         }
+
+        String[] numbers = settings.getWhitePhoneList().split(",");
 
         for (String number : numbers) {
             if (phoneNumber.compareTo(number) == 0)
