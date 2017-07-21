@@ -9,13 +9,16 @@ import org.apache.log4j.Logger;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.Timer;
 
 public class SmsService extends Service {
     private static final Logger logger = Log.getLogger(SmsService.class);
 
     private SmsStorage smsStorage = null;
     private MessageDatabaseHelper messageDatabase = null;
-    private MessageUploader messageUploader = null;
+    //private MessageUploader messageUploader = null;
+    //private Thread messageUploaderThread = null;
+    private static Timer messageUploaderTimer = new Timer();
     private Settings settings = null;
 
     public SmsService () {
@@ -38,12 +41,23 @@ public class SmsService extends Service {
             settings = new Settings(SmsService.this);
         loadSmsAsync();
 
-        if (messageUploader == null)
+        messageUploaderTimer.scheduleAtFixedRate(new MessageUploader(SmsService.this), 0, settings.getSendInterval() * 1000);
+
+        /*if (messageUploaderThread == null) {
+            messageUploaderThread = new Thread(new MessageUploader(SmsService.this));
+            messageUploaderThread.start();
+        }
+
+        if (messageUploaderThread.getState() != Thread.State.RUNNABLE) {
+            messageUploaderThread.start();
+        }*/
+
+        /*if (messageUploader == null)
             messageUploader = new MessageUploader(SmsService.this);
 
         if (!messageUploader.isRunning()) {
             new Thread(messageUploader).start();
-        }
+        }*/
 
         logger.info("Service create");
     }

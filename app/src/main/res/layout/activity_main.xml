@@ -104,12 +104,12 @@
         android:id="@+id/button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
+        android:text="Button"
+        android:visibility="invisible"
+        android:layout_below="@+id/clearDatabaseButton"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_marginBottom="58dp"
-        android:text="Button"
-        android:visibility="invisible" />
+        android:layout_marginTop="23dp" />
 
     <Button
         android:id="@+id/clearDatabaseButton"
@@ -121,5 +121,23 @@
         android:layout_alignParentStart="true"
         android:layout_below="@+id/stopServiceButton"
         android:text="Очистить временное хранилище" />
+
+    <TextView
+        android:id="@+id/versionTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:text="1.0.0" />
+
+    <TextView
+        android:id="@+id/textView5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/versionTextView"
+        android:layout_toLeftOf="@+id/versionTextView"
+        android:layout_toStartOf="@+id/versionTextView"
+        android:text="v. " />
 
 </RelativeLayout>

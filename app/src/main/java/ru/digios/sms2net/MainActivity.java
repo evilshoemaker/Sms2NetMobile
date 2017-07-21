@@ -5,6 +5,8 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -12,6 +14,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import org.apache.log4j.Logger;
@@ -41,6 +44,8 @@ public class MainActivity extends AppCompatActivity {
     private EditText hostToConnectEditText = null;
     private EditText intervalEditText = null;
 
+    private TextView versionText = null;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,6 +59,8 @@ public class MainActivity extends AppCompatActivity {
         whiteListEditText = (EditText) findViewById(R.id.whiteListEditText);
         hostToConnectEditText = (EditText) findViewById(R.id.hostToConnectEditText);
         intervalEditText = (EditText) findViewById(R.id.intervalEditText);
+
+        versionText = (TextView) findViewById(R.id.versionTextView);
 
         whiteListEditText.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
@@ -114,6 +121,17 @@ public class MainActivity extends AppCompatActivity {
         });
 
         loadSettings();
+
+        getAppVersion();
+    }
+
+    private void getAppVersion() {
+        try {
+            PackageInfo pInfo = this.getPackageManager().getPackageInfo(getPackageName(), 0);
+            versionText.setText(pInfo.versionName);
+        } catch (PackageManager.NameNotFoundException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
